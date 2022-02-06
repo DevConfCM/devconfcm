@@ -9,10 +9,12 @@ Website for DevConfCM (devconf.cm)
 
 #### Build frontend code
 `cd devconfcm/frontend` 
+
 `npm run build` 
 
 #### Run
 `cd devconfcm` 
+
 `go run main.go`
 
 **Note**: Because of how the code is setup, when you make changes to the frontend you need to run `npm run build` from within the frontend directory
