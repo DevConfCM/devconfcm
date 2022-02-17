@@ -2,11 +2,11 @@ package routes
 
 import (
 	"devconfcm/pkg/handlers"
-
-	"github.com/labstack/echo/v4"
+	"net/http"
 )
 
-func RegisterRoutes(e *echo.Echo) {
-	e.POST("/api/user/", handlers.CreateUser)
-	e.GET("/api/user/:username/", handlers.GetUser)
+// add new routes here
+var routes = []Route{
+	{"/api/user/", http.MethodGet, handlers.GetUser},
+	{"/api/user/", http.MethodPost, handlers.CreateUser},
 }
