@@ -14,5 +14,4 @@ func Run() {
 	e.Static("static", "website/build/static")
 	e.File("/", "website/build/index.html")
 	e.Logger.Fatal(e.Start(":5000"))
-
 }

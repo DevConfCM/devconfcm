@@ -7,6 +7,6 @@ import (
 
 // add new routes here
 var routes = []Route{
-	{"/api/user/", http.MethodGet, handlers.GetUser},
+	{"/api/user/:id/", http.MethodGet, handlers.GetUser},
 	{"/api/user/", http.MethodPost, handlers.CreateUser},
 }
