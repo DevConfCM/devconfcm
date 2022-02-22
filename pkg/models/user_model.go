@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"errors"
+
+	"gorm.io/gorm"
+)
 
 type User struct {
 	gorm.Model
@@ -30,7 +34,7 @@ func UpdateUser(ID int, u *User) (*User, error) {
 	var user User
 	result := db.First(&user, ID)
 	if result.RowsAffected == 0 {
-		return nil, result.Error
+		return nil, errors.New("No user with given ID found")
 	}
 	user.Name = u.Name
 	user.Email = u.Email
@@ -41,8 +45,8 @@ func UpdateUser(ID int, u *User) (*User, error) {
 
 func DeleteUser(ID int) error {
 	result := db.Delete(&User{}, ID)
-	if result.Error != nil {
-		return result.Error
+	if result.RowsAffected == 0 {
+		return errors.New("No user with given ID found")
 	}
 	return nil
 }

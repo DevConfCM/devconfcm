@@ -45,7 +45,7 @@ func UpdateUser(c echo.Context) error {
 	}
 	user, err := models.UpdateUser(id, u)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusNotFound, "No user with given ID found")
+		return echo.NewHTTPError(http.StatusNotFound, err.Error())
 	}
 	return c.JSON(http.StatusOK, user)
 }
@@ -56,7 +56,7 @@ func DeleteUser(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 	if err := models.DeleteUser(id); err != nil {
-		return echo.NewHTTPError(http.StatusNotFound, "No user with given ID found")
+		return echo.NewHTTPError(http.StatusNotFound, err.Error())
 	}
 	return c.JSON(http.StatusNoContent, nil)
 }
