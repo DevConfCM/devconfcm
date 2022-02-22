@@ -14,7 +14,7 @@ func CreateUser(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 	models.CreateUser(u)
-	return c.JSON(http.StatusOK, u)
+	return c.JSONPretty(http.StatusOK, u, " ")
 }
 
 func GetUser(c echo.Context) error {
@@ -26,12 +26,12 @@ func GetUser(c echo.Context) error {
 	if u == nil {
 		return echo.NewHTTPError(http.StatusNotFound, "No user with given ID found")
 	}
-	return c.JSON(http.StatusOK, u)
+	return c.JSONPretty(http.StatusOK, u, " ")
 }
 
 func GetAllUsers(c echo.Context) error {
 	users := models.GetAllUsers()
-	return c.JSON(http.StatusOK, users)
+	return c.JSONPretty(http.StatusOK, users, " ")
 }
 
 func UpdateUser(c echo.Context) error {
@@ -47,7 +47,7 @@ func UpdateUser(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusNotFound, err.Error())
 	}
-	return c.JSON(http.StatusOK, user)
+	return c.JSONPretty(http.StatusOK, user, " ")
 }
 
 func DeleteUser(c echo.Context) error {
@@ -58,5 +58,5 @@ func DeleteUser(c echo.Context) error {
 	if err := models.DeleteUser(id); err != nil {
 		return echo.NewHTTPError(http.StatusNotFound, err.Error())
 	}
-	return c.JSON(http.StatusNoContent, nil)
+	return c.JSONPretty(http.StatusNoContent, nil, " ")
 }
