@@ -24,10 +24,10 @@ func CreateUser(u *User) *User {
 	return u
 }
 
-func GetAllUsers() *[]User {
-	var users []User
+func GetAllUsers() []*User {
+	var users []*User
 	db.Find(&users)
-	return &users
+	return users
 }
 
 func UpdateUser(ID int, u *User) (*User, error) {
