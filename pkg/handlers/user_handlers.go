@@ -33,3 +33,19 @@ func GetAllUsers(c echo.Context) error {
 	users := models.GetAllUsers()
 	return c.JSON(http.StatusOK, users)
 }
+
+func UpdateUser(c echo.Context) error {
+	u := &models.User{}
+	if err := c.Bind(u); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	id, err := strconv.Atoi(c.Param("userId"))
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	user, err := models.UpdateUser(id, u)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusNotFound, "No user with given ID found")
+	}
+	return c.JSON(http.StatusOK, user)
+}

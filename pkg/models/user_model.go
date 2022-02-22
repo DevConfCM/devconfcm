@@ -20,8 +20,21 @@ func CreateUser(u *User) *User {
 	return u
 }
 
-func GetAllUsers() []*User {
-	var users []*User
+func GetAllUsers() *[]User {
+	var users []User
 	db.Find(&users)
-	return users
+	return &users
+}
+
+func UpdateUser(ID int, u *User) (*User, error) {
+	var user User
+	result := db.First(&user, ID)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	user.Name = u.Name
+	user.Email = u.Email
+	user.Username = u.Username
+	db.Save(&user)
+	return &user, nil
 }
