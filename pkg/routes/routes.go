@@ -11,4 +11,5 @@ var routes = []Route{
 	{"/api/user/", http.MethodPost, handlers.CreateUser},
 	{"/api/users/", http.MethodGet, handlers.GetAllUsers},
 	{"/api/users/:userId", http.MethodPut, handlers.UpdateUser},
+	{"/api/users/:userId", http.MethodDelete, handlers.DeleteUser},
 }

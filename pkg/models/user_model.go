@@ -29,7 +29,7 @@ func GetAllUsers() *[]User {
 func UpdateUser(ID int, u *User) (*User, error) {
 	var user User
 	result := db.First(&user, ID)
-	if result.Error != nil {
+	if result.RowsAffected == 0 {
 		return nil, result.Error
 	}
 	user.Name = u.Name
@@ -37,4 +37,12 @@ func UpdateUser(ID int, u *User) (*User, error) {
 	user.Username = u.Username
 	db.Save(&user)
 	return &user, nil
+}
+
+func DeleteUser(ID int) error {
+	result := db.Delete(&User{}, ID)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
 }

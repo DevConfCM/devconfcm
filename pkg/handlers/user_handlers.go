@@ -49,3 +49,14 @@ func UpdateUser(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, user)
 }
+
+func DeleteUser(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("userId"))
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	if err := models.DeleteUser(id); err != nil {
+		return echo.NewHTTPError(http.StatusNotFound, "No user with given ID found")
+	}
+	return c.JSON(http.StatusNoContent, nil)
+}
