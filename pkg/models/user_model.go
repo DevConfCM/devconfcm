@@ -19,3 +19,9 @@ func CreateUser(u *User) *User {
 	db.Create(u)
 	return u
 }
+
+func GetAllUsers() []*User {
+	var users []*User
+	db.Find(&users)
+	return users
+}

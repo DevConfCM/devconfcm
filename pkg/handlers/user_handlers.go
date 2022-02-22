@@ -28,3 +28,8 @@ func GetUser(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, u)
 }
+
+func GetAllUsers(c echo.Context) error {
+	users := models.GetAllUsers()
+	return c.JSON(http.StatusOK, users)
+}
