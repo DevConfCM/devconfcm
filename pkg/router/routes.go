@@ -1,4 +1,4 @@
-package routes
+package router
 
 import (
 	"devconfcm/pkg/handlers"
@@ -6,7 +6,7 @@ import (
 )
 
 // add new routes here
-var routes = []Route{
+var routes = []route{
 	{"/api/users/:id", http.MethodGet, handlers.GetUser},
 	{"/api/users", http.MethodPost, handlers.CreateUser},
 	{"/api/users", http.MethodGet, handlers.GetAllUsers},

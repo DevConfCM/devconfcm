@@ -1,9 +1,7 @@
 package main
 
-import (
-	"devconfcm/cmd/devconfcm"
-)
+import "devconfcm/pkg/router"
 
 func main() {
-	devconfcm.Run()
+	router.Start()
 }
