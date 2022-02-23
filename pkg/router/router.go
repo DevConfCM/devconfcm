@@ -14,8 +14,6 @@ type (
 	}
 )
 
-var router *echo.Echo
-
 var once sync.Once
 
 func Start() {
@@ -23,7 +21,7 @@ func Start() {
 }
 
 func start() {
-	router = echo.New()
+	router := echo.New()
 
 	/// add routes
 	for _, route := range routes {
