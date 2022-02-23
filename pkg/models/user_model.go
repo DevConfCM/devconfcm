@@ -30,16 +30,13 @@ func GetAllUsers() []*User {
 	return users
 }
 
-func UpdateUser(ID int, u *User) (*User, error) {
+func UpdateUser(ID int, fields map[string]interface{}) (*User, error) {
 	var user User
 	result := db.First(&user, ID)
 	if result.RowsAffected == 0 {
 		return nil, errors.New("No user with given ID found")
 	}
-	user.Name = u.Name
-	user.Email = u.Email
-	user.Username = u.Username
-	db.Save(&user)
+	db.Model(&user).Updates(fields)
 	return &user, nil
 }
 

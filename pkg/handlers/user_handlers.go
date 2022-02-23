@@ -35,15 +35,15 @@ func GetAllUsers(c echo.Context) error {
 }
 
 func UpdateUser(c echo.Context) error {
-	u := &models.User{}
-	if err := c.Bind(u); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
-	user, err := models.UpdateUser(id, u)
+	fields := map[string]interface{}{}
+	if err := c.Bind(&fields); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	user, err := models.UpdateUser(id, fields)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusNotFound, err.Error())
 	}
