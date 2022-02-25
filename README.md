@@ -15,6 +15,8 @@ Website for DevConfCM (devconf.cm)
 #### Run
 `cd devconfcm` 
 
+Create a `.env` to house all environment variables (`PORT` e.t.c)
+
 `go run main.go`
 
 **Note**: Because of how the code is setup, when you make changes to the frontend you need to run `npm run build` from within the frontend directory
