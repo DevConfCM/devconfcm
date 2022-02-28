@@ -1,8 +1,9 @@
 package router
 
 import (
-	"os"
 	"sync"
+
+	"devconfcm/pkg/config"
 
 	"github.com/labstack/echo/v4"
 )
@@ -33,6 +34,6 @@ func start() {
 	router.File("/", "website/build/index.html")
 
 	// start server
-	port := ":" + os.Getenv("PORT")
+	port := config.DefaultConfig.Port
 	router.Logger.Fatal(router.Start(port))
 }
