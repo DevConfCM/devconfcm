@@ -1,20 +1,37 @@
 package config
 
 import (
-	"os"
+	"log"
 
-	_ "github.com/joho/godotenv/autoload"
+	"github.com/spf13/viper"
 )
 
 type Config struct {
-	Host string
-	Port string
+	Host   string `mapstructure:"HOST"`
+	Port   int    `mapstructure:"PORT"`
+	TestDB string `mapstructure:"TEST_DB"`
 }
 
-func getConfigs() Config { 
-	return Config{
-		Port: ":" + os.Getenv("PORT"),		
+func LoadConfigs(path string) (config Config, err error) {
+	viper.AddConfigPath(path)
+	viper.SetConfigName("app")
+	viper.SetConfigType("env")
+	viper.AutomaticEnv()
+	if err = viper.ReadInConfig(); err != nil {
+		return
 	}
+	if err = viper.Unmarshal(&config); err != nil {
+		return
+	}
+	return
 }
 
-var DefaultConfig = getConfigs()
+func getConfigs() Config {
+	configs, err := LoadConfigs(".") // path: root folder
+	if err != nil {
+		log.Fatal("Unable to log configs: ", err.Error())
+	}
+	return configs
+}
+
+var DefaultConfigs = getConfigs()

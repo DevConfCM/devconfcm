@@ -1,6 +1,7 @@
 package router
 
 import (
+	"strconv"
 	"sync"
 
 	"devconfcm/pkg/config"
@@ -34,6 +35,6 @@ func start() {
 	router.File("/", "website/build/index.html")
 
 	// start server
-	port := config.DefaultConfig.Port
+	port := ":" + strconv.Itoa(config.DefaultConfigs.Port)
 	router.Logger.Fatal(router.Start(port))
 }
