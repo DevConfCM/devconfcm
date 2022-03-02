@@ -12,7 +12,7 @@ type Config struct {
 	TestDB string `mapstructure:"TEST_DB"`
 }
 
-func LoadConfigs(path string) (config Config, err error) {
+func loadConfigs(path string) (config Config, err error) {
 	viper.AddConfigPath(path)
 	viper.SetConfigName("app")
 	viper.SetConfigType("env")
@@ -27,11 +27,11 @@ func LoadConfigs(path string) (config Config, err error) {
 }
 
 func getConfigs() Config {
-	configs, err := LoadConfigs(".") // path: root folder
+	configs, err := loadConfigs(".") // path: root folder
 	if err != nil {
-		log.Fatal("Unable to log configs: ", err.Error())
+		log.Fatal("Unable to load configs: ", err.Error())
 	}
 	return configs
 }
 
-var DefaultConfigs = getConfigs()
+var DefaultConfig = getConfigs()
