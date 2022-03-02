@@ -1,9 +1,10 @@
 package models
 
 import (
+	"devconfcm/pkg/config"
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"devconfcm/pkg/config"
 )
 
 var db *gorm.DB
